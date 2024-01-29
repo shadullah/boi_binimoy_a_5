@@ -11,13 +11,17 @@ body {
   overflow-x: hidden;
   background: #fed5c8;
 } */
+.carousel-container {
+    margin-top: 200px; /* Adjust margin-top as needed */
+    margin-bottom: 200px; /* Adjust margin-bottom as needed */
+    position: relative;
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+}
 
 .list {
-  height: 200px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%)
+    height: 100%; /* Ensure the carousel takes full height of its container */
+    position: relative;
 }
 
 .list li {
@@ -78,20 +82,23 @@ body {
 }
 </style>
 <div>
-    <div>description</div>
+    <!-- <div>description</div>
 
-    <div>image hbe</div>
-    <ul class="list">
-        <li class="hide"></li>
-        <li class="prev"></li>
-        <li class="act"></li>
-        <li class="next"></li>
-        <li class="next new-next"></li>
-      </ul>
+    <div>image hbe</div> -->
+    <div class="carousel">
+        <ul class="list">
+            <li class="hide"></li>
+            <li class="prev"></li>
+            <li class="act"></li>
+            <li class="next"></li>
+            <li class="next new-next"></li>
+          </ul>
+    </div>
       
       <div class="swipe"></div>
 </div>
 
+<script src="https://hammerjs.github.io/dist/hammer.js"></script>
 <script>
    const $ = selector => {
   return document.querySelector(selector);
