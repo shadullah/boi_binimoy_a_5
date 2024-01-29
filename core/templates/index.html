@@ -2,186 +2,115 @@
 {% load static %} 
 {% block content %}
 <style>
-/* * {
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  overflow-x: hidden;
-  background: #fed5c8;
-} */
-.carousel-container {
-    margin-top: 200px; /* Adjust margin-top as needed */
-    margin-bottom: 200px; /* Adjust margin-bottom as needed */
-    position: relative;
+.bg{
     width: 100%;
-    height: 200px; /* Adjust height as needed */
-}
-
-.list {
-    height: 100%; /* Ensure the carousel takes full height of its container */
+    height: 500px;
     position: relative;
+    overflow: hidden;
+}
+.slide{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: 1s;
+}
+.btns1{
+    position: absolute;
+    top: 400px;
+}
+.btns2{
+    position: absolute;
+    top: 400px;
+    right: 0px;
 }
 
-.list li {
-  list-style-type: none;
-  
-  width: 200px;
-  height: 200px;
-  opacity: .25;
-  position: absolute;
-  left: 50%;
-  margin-left: -100px;
-  border-radius: 2px;
-  background: #9C89B8;
-  transition: transform 1s, opacity 1s;
+.nav button{
+    font-size: 25px;
+    border:none;
 }
 
-.list .act {
-  opacity: 1;
-}
-
-.list .prev,
-.list .next {
-  cursor: pointer;
-}
-
-.list .prev {
-  transform: translateX(-220px) scale(.85);
-}
-
-.list .next {
-  transform: translateX(220px) scale(.85);
-}
-
-.list .hide {
-  transform: translateX(-420px) scale(.85);
-}
-
-.list .new-next {
-  transform: translateX(420px) scale(.85);
-}
-
-.list .hide,
-.list .new-next {
-  opacity: 0;
-  transition: opacity .5s, transform .5s;
-}
-
-.swipe {
-  width: 270px;
-  height: 200px;
-  position: absolute;
-  background-color: green;
-  border-radius: 2px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  opacity: 0;
-}
 </style>
 <div>
-    <!-- <div>description</div>
-
-    <div>image hbe</div> -->
-    <div class="carousel">
-        <ul class="list">
-            <li class="hide"></li>
-            <li class="prev"></li>
-            <li class="act"></li>
-            <li class="next"></li>
-            <li class="next new-next"></li>
-          </ul>
+    <div class="bg">
+        <div class="slide bg-gray-100">
+            <div class="flex justify-between items-center">
+                <div class="w-1/2 px-16 ml-12">
+                    <h5 class="text-yellow-400 my-2 text-2xl">Best Seller</h5>
+                    <h1 class="text-5xl font-bold mb-2">Think And Grow Rich</h1>
+                    <p class="text-xl italic mb-5">Nepoleon Hill</p>
+                    <p class="text-sm mb-5">This book reminded me of when my wife encouraged me to read the Ferber sleeping book which was 250+ pages about the science of sleep in babies. I “google imaged” Ferber technique and it gave me a very clear table of how to execute controlled crying in babies.</p>
+                    <button class="bg-yellow-800 text-white px-3 py-2 rounded-lg">Buy Now</button>
+                </div>
+                <div class="w-1/2 p-6 rounded-lg">
+                    <img class="rounded-lg mx-auto w-[200px]" src="https://paulminors.com/wp-content/uploads/2016/09/Think-and-grow-rich-book-summary-pdf.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="slide bg-gray-100">
+            <div class="flex justify-between items-center">
+                <div class="w-1/2 px-16 ml-12">
+                    <h5 class="text-yellow-400 my-2 text-2xl">Best Management</h5>
+                    <h1 class="text-5xl font-bold mb-2">The Miracle Morning</h1>
+                    <p class="text-xl italic mb-5">Hal Elrod</p>
+                    <p class="text-sm mb-5">It is an awesome book and. It is the best self development book .It's really too good  for beginners and quotes of this books is motivate me for waking up early in the morning and after read this book my every morning was miracle it also help you how to achieve your goals .it really change my life .</p>
+                    <button class="bg-yellow-800 text-white px-3 py-2 rounded-lg">Explore Now</button>
+                </div>
+                <div class="w-1/2 p-6 rounded-lg">
+                    <img class="rounded-lg mx-auto w-[120px]" src="https://scoreread.com/content/images/2023/12/the-morning-miracle--bed-.jpg" alt="">
+                </div>
+            </div>
+        </div>
     </div>
-      
-      <div class="swipe"></div>
+    <div class="flex justify-between">
+        <div class="btns1">
+            <button onclick="goPrev()">
+                <svg class="bg-white rounded-full h-12 w-12"  height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="352,115.4 331.3,96 160,256 331.3,416 352,396.7 201.5,256 "/></svg>
+                </button>
+        </div>
+        <div class="btns2">
+            <button onclick="goNext()">
+                <svg class="bg-white rounded-full h-12 w-12" height="50px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg>
+            </button>
+        </div>
+    </div>
 </div>
 
-<script src="https://hammerjs.github.io/dist/hammer.js"></script>
+
+<!-- script source start here -->
 <script>
-   const $ = selector => {
-  return document.querySelector(selector);
-};
+    const slides = document.querySelectorAll('.slide')
+    let counter = 0;
+    const totalSlides = slides.length;
+    slides.forEach(
+        (slide, index)=>{
+            slide.style.left = `${index * 100}%`
+        })
 
-function next() {
-  if ($(".hide")) {
-    $(".hide").remove(); 
-  }
+    const goNext = () =>{
+        if (counter < totalSlides - 1) {
+            counter++;
+        } else {
+            counter = 0; // Reset to the first slide if at the last slide
+        }
+        slideDiv();
+    }
+    const goPrev = () =>{
+        if (counter > 0) {
+            counter--;
+        } else {
+            counter = totalSlides - 1; // Go to the last slide if at the first slide
+        }
+        slideDiv();
+    }
 
-  /* Step */
+    const slideDiv = ()=>{
+        slides.forEach(
+            (slide) =>{
+                slide.style.transform = `translateX(-${counter * 100}%)`
+            }
+        )
+    }
 
-  if ($(".prev")) {
-    $(".prev").classList.add("hide");
-    $(".prev").classList.remove("prev");
-  }
-
-  $(".act").classList.add("prev");
-  $(".act").classList.remove("act");
-
-  $(".next").classList.add("act");
-  $(".next").classList.remove("next");
-
-  /* New Next */
-
-  $(".new-next").classList.remove("new-next");
-
-  const addedEl = document.createElement('li');
-
-  $(".list").appendChild(addedEl);
-  addedEl.classList.add("next","new-next");
-}
-
-function prev() {
-  $(".new-next").remove();
-    
-  /* Step */
-
-  $(".next").classList.add("new-next");
-
-  $(".act").classList.add("next");
-  $(".act").classList.remove("act");
-
-  $(".prev").classList.add("act");
-  $(".prev").classList.remove("prev");
-
-  /* New Prev */
-
-  $(".hide").classList.add("prev");
-  $(".hide").classList.remove("hide");
-
-  const addedEl = document.createElement('li');
-
-  $(".list").insertBefore(addedEl, $(".list").firstChild);
-  addedEl.classList.add("hide");
-}
-
-slide = element => {
-  /* Next slide */
-  
-  if (element.classList.contains('next')) {
-    next();
-    
-  /* Previous slide */
-    
-  } else if (element.classList.contains('prev')) {
-    prev();
-  }
-}
-
-const slider = $(".list"),
-      swipe = new Hammer($(".swipe"));
-
-slider.onclick = event => {
-  slide(event.target);
-}
-
-swipe.on("swipeleft", (ev) => {
-  next();
-});
-
-swipe.on("swiperight", (ev) => {
-  prev();
-});
 </script>
+
 {% endblock %}
