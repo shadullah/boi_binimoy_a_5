@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'account',
     'books',
     'categories',
+    'transactions',
     'django_browser_reload'
 ]
 

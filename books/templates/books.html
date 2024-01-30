@@ -1,40 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="text-5xl text-center mx-auto font-medium my-12">Books Details</h1>
+<h1 class="text-5xl text-center mx-auto font-medium my-12">Book Details</h1>
 
 <!-- card start here -->
-<div class="flex items-center mx-12">
+<div class="flex items-center mx-12 mb-12">
   <div class="p-5 w-1/2">
-    <img class="mx-auto rounded-lg" src="{{cars.image.url}}" alt="#" />
+    <img class="mx-auto w-64 rounded-lg" src="{{books.image.url}}" alt="#" />
   </div>
   <div class="w-1/2 p-5">
     <div class="">
-      <h1 class="my-2 text-5xl font-bold tracking-tight">{{cars.car}}</h1>
+      <h1 class="my-2 text-5xl font-bold tracking-tight">{{books.title}}</h1>
 
       <h3 class="py-3 text-3xl font-medium italic text-gray-900">
-        Price: ${{cars.price}}
+        Price: ${{books.price}}
       </h3>
       <h5 class="py-3 text-xl font-semibold italic text-gray-900">
-        <!-- {% comment %} Quantity: {{cars.quantity}} {% endcomment %} -->
+        Author: {{books.author}}
       </h5>
     </div>
-    <div class="m-5">
-      <!-- {% comment %} <p class="flex items-center">
-        Brand: {% for cat in cars.brand.all %}
+    <div class="">
+      Category: {% for cat in books.category.all %}
         <a
           href="#"
-          class="px-3 py-2 text-sm font-medium text-center text-gray-500 m-2"
+          class="px-3 py-2 text-xl font-medium text-center text-gray-500 m-2"
         >
           {{cat.name}}
         </a>
         {% endfor %}
+      <!-- {% comment %} <p class="flex items-center">
+        
       </p> {% endcomment %}
-      {% comment %} <a href="{% url 'buynow' cars.id %}">
-        <p class="bg-sky-600 px-4 py-3 rounded-lg text-center">
-          <button class="text-white text-center font-bold">Buy Now</button>
-        </p>
+      {% comment %} <a href="{% url 'buynow' books.id %}">
+        
       </a> {% endcomment %} -->
+      <p class="bg-blue-600 px-4 py-3 rounded-lg text-center">
+        <button class="text-white text-center font-bold">Buy Now</button>
+      </p>
     </div>
   </div>
 </div>

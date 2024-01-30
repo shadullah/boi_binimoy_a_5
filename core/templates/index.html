@@ -206,6 +206,34 @@
 
 <h1 class="text-5xl text-bold mx-32 mt-12">Books on sale</h1>
 <div class="w-24 h-1 bg-black mx-32 mt-3"></div>
+
+<!-- category start -->
+<p class="m-2 text-center text-xl font-bold mt-5">
+  All Categories | {{books | length}} Results Found
+</p>
+
+<div class="flex items-center justify-center mx-auto my-3 rounded-lg">
+  <div class="flex items-center m-4">
+    <a
+      class="bg-yellow-500 mx-2 px-3 py-2 rounded-lg"
+      href="{% url 'home' %}"
+      >All</a
+    >
+    {% for i in category %}
+    <a
+      class="bg-yellow-500 mx-2 px-3 py-2 rounded-lg"
+      href="{% url 'category_wise' i.slug %}"
+      >{{i.name}}</a
+    >
+
+    {% endfor %}
+  </div>
+</div>
+
+
+<!-- category end -->
+
+
 <!-- book card start -->
 <div class="grid grid-cols-4 gap-4 mx-24 my-12">
   {% for i in books %}
@@ -220,7 +248,7 @@
       </div>
       <div class="flex justify-between items-center py-3 px-6">
         <p class="text-xl">${{ i.price }}</p>
-        <a href="">
+        <a href="{% url 'details' i.id %}">
           <button class="bg-black text-white px-3 py-2 rounded-lg">Buy Now</button>
         </a>
       </div>
