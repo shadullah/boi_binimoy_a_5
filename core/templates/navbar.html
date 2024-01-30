@@ -25,11 +25,13 @@
           />
         </svg>
       </div>
-      <input
-        type="text"
-        class="search-input w-80 px-6 py-3 rounded-sm"
-        placeholder="Search here"
-      />
+      <div>
+        <input
+          type="text"
+          class="search-input px-6 py-3 rounded-sm"
+          placeholder="Search here"
+        />
+      </div>
     </div>
 
     <!-- Social Media Icon -->
@@ -110,7 +112,7 @@
     {% if request.user.is_authenticated %}
     <div>
       <a
-        href=""
+        href="{% url 'profile' %}"
         class="login-button mt-4 mr-8 px-4 py-2 bg-yellow-800 text-white rounded-lg"
       >
         Profile

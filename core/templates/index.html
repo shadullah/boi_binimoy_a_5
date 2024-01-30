@@ -1,116 +1,169 @@
-{% extends "base.html" %}
-{% load static %} 
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 <style>
-.bg{
+  .bg {
     width: 100%;
     height: 500px;
     position: relative;
     overflow: hidden;
-}
-.slide{
+  }
+  .slide {
     width: 100%;
     height: 100%;
     position: absolute;
     transition: 1s;
-}
-.btns1{
+  }
+  .btns1 {
     position: absolute;
     top: 400px;
-}
-.btns2{
+  }
+  .btns2 {
     position: absolute;
     top: 400px;
     right: 0px;
-}
+  }
 
-.nav button{
+  .nav button {
     font-size: 25px;
-    border:none;
-}
-
+    border: none;
+  }
 </style>
 <div>
-    <div class="bg">
-        <div class="slide bg-gray-100">
-            <div class="flex justify-between items-center">
-                <div class="w-1/2 px-16 ml-12">
-                    <h5 class="text-yellow-400 my-2 text-2xl">Best Seller</h5>
-                    <h1 class="text-5xl font-bold mb-2">Think And Grow Rich</h1>
-                    <p class="text-xl italic mb-5">Nepoleon Hill</p>
-                    <p class="text-sm mb-5">This book reminded me of when my wife encouraged me to read the Ferber sleeping book which was 250+ pages about the science of sleep in babies. I “google imaged” Ferber technique and it gave me a very clear table of how to execute controlled crying in babies.</p>
-                    <button class="bg-yellow-800 text-white px-3 py-2 rounded-lg">Buy Now</button>
-                </div>
-                <div class="w-1/2 p-6 rounded-lg">
-                    <img class="rounded-lg mx-auto w-[200px]" src="https://paulminors.com/wp-content/uploads/2016/09/Think-and-grow-rich-book-summary-pdf.jpg" alt="">
-                </div>
-            </div>
+  <div class="bg">
+    <div class="slide bg-gray-100">
+      <div class="flex justify-between items-center">
+        <div class="w-1/2 px-16 ml-12">
+          <h5 class="text-yellow-400 my-2 text-2xl">Best Seller</h5>
+          <h1 class="text-5xl font-bold mb-2">Think And Grow Rich</h1>
+          <p class="text-xl italic mb-5">Nepoleon Hill</p>
+          <p class="text-sm mb-5">
+            This book reminded me of when my wife encouraged me to read the
+            Ferber sleeping book which was 250+ pages about the science of sleep
+            in babies. I “google imaged” Ferber technique and it gave me a very
+            clear table of how to execute controlled crying in babies.
+          </p>
+          <button class="bg-yellow-800 text-white px-3 py-2 rounded-lg">
+            Buy Now
+          </button>
         </div>
-        <div class="slide bg-gray-100">
-            <div class="flex justify-between items-center">
-                <div class="w-1/2 px-16 ml-12">
-                    <h5 class="text-yellow-400 my-2 text-2xl">Best Management</h5>
-                    <h1 class="text-5xl font-bold mb-2">The Miracle Morning</h1>
-                    <p class="text-xl italic mb-5">Hal Elrod</p>
-                    <p class="text-sm mb-5">It is an awesome book and. It is the best self development book .It's really too good  for beginners and quotes of this books is motivate me for waking up early in the morning and after read this book my every morning was miracle it also help you how to achieve your goals .it really change my life .</p>
-                    <button class="bg-yellow-800 text-white px-3 py-2 rounded-lg">Explore Now</button>
-                </div>
-                <div class="w-1/2 p-6 rounded-lg">
-                    <img class="rounded-lg mx-auto w-[120px]" src="https://scoreread.com/content/images/2023/12/the-morning-miracle--bed-.jpg" alt="">
-                </div>
-            </div>
+        <div class="w-1/2 p-6 rounded-lg">
+          <img
+            class="rounded-lg mx-auto w-[200px]"
+            src="https://paulminors.com/wp-content/uploads/2016/09/Think-and-grow-rich-book-summary-pdf.jpg"
+            alt=""
+          />
         </div>
+      </div>
     </div>
-    <div class="flex justify-between">
-        <div class="btns1">
-            <button onclick="goPrev()">
-                <svg class="bg-white rounded-full h-12 w-12"  height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="352,115.4 331.3,96 160,256 331.3,416 352,396.7 201.5,256 "/></svg>
-                </button>
+    <div class="slide bg-gray-100">
+      <div class="flex justify-between items-center">
+        <div class="w-1/2 px-16 ml-12">
+          <h5 class="text-yellow-400 my-2 text-2xl">Best Management</h5>
+          <h1 class="text-5xl font-bold mb-2">The Miracle Morning</h1>
+          <p class="text-xl italic mb-5">Hal Elrod</p>
+          <p class="text-sm mb-5">
+            It is an awesome book and. It is the best self development book
+            .It's really too good for beginners and quotes of this books is
+            motivate me for waking up early in the morning and after read this
+            book my every morning was miracle it also help you how to achieve
+            your goals .it really change my life .
+          </p>
+          <button class="bg-yellow-800 text-white px-3 py-2 rounded-lg">
+            Explore Now
+          </button>
         </div>
-        <div class="btns2">
-            <button onclick="goNext()">
-                <svg class="bg-white rounded-full h-12 w-12" height="50px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "/></svg>
-            </button>
+        <div class="w-1/2 p-6 rounded-lg">
+          <img
+            class="rounded-lg mx-auto w-[120px]"
+            src="https://scoreread.com/content/images/2023/12/the-morning-miracle--bed-.jpg"
+            alt=""
+          />
         </div>
+      </div>
     </div>
+  </div>
+  <div class="flex justify-between">
+    <div class="btns1">
+      <button onclick="goPrev()">
+        <svg
+          class="bg-white rounded-full h-12 w-12"
+          height="512px"
+          id="Layer_1"
+          style="enable-background: new 0 0 512 512"
+          version="1.1"
+          viewBox="0 0 512 512"
+          width="512px"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <polygon
+            points="352,115.4 331.3,96 160,256 331.3,416 352,396.7 201.5,256 "
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="btns2">
+      <button onclick="goNext()">
+        <svg
+          class="bg-white rounded-full h-12 w-12"
+          height="50px"
+          id="Layer_1"
+          style="enable-background: new 0 0 512 512"
+          version="1.1"
+          viewBox="0 0 512 512"
+          width="512px"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <polygon
+            points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 "
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
 </div>
-
 
 <!-- script source start here -->
 <script>
-    const slides = document.querySelectorAll('.slide')
-    let counter = 0;
-    const totalSlides = slides.length;
-    slides.forEach(
-        (slide, index)=>{
-            slide.style.left = `${index * 100}%`
-        })
+  const slides = document.querySelectorAll(".slide");
+  let counter = 0;
+  const totalSlides = slides.length;
+  slides.forEach((slide, index) => {
+    slide.style.left = `${index * 100}%`;
+  });
 
-    const goNext = () =>{
-        if (counter < totalSlides - 1) {
-            counter++;
-        } else {
-            counter = 0; // Reset to the first slide if at the last slide
-        }
-        slideDiv();
+  const goNext = () => {
+    if (counter < totalSlides - 1) {
+      counter++;
+    } else {
+      counter = 0; // Reset to the first slide if at the last slide
     }
-    const goPrev = () =>{
-        if (counter > 0) {
-            counter--;
-        } else {
-            counter = totalSlides - 1; // Go to the last slide if at the first slide
-        }
-        slideDiv();
+    slideDiv();
+  };
+  const goPrev = () => {
+    if (counter > 0) {
+      counter--;
+    } else {
+      counter = totalSlides - 1; // Go to the last slide if at the first slide
     }
+    slideDiv();
+  };
 
-    const slideDiv = ()=>{
-        slides.forEach(
-            (slide) =>{
-                slide.style.transform = `translateX(-${counter * 100}%)`
-            }
-        )
-    }
+  const slideDiv = () => {
+    slides.forEach((slide) => {
+      slide.style.transform = `translateX(-${counter * 100}%)`;
+    });
+  };
 
+  const autoSlide = () => {
+    setInterval(() => {
+      goNext();
+    }, 5000);
+  };
+
+  document.addEventListener("DOMContentLoaded", autoSlide);
 </script>
 
 {% endblock %}

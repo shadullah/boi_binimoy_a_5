@@ -1,6 +1,6 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-
+from django import forms
 
 class UserRegForm(UserCreationForm):
     class Meta:
@@ -11,3 +11,9 @@ class UserRegForm(UserCreationForm):
     #     if commit== True:
     #         our_user.save()
     #     return our_user
+        
+class UpdateUserForm(forms.ModelForm):
+    # password = None
+    class Meta:
+        model = User 
+        fields = ['username', 'first_name', 'last_name', 'email']
