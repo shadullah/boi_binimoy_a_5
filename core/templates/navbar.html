@@ -90,7 +90,10 @@
   <div class="flex justify-between items-center">
     <!-- Menu -->
     <div class="flex">
-      <a href="" class="block mt-4 text-yellow-800 font-bold text-xl mr-8">
+      <a
+        href="{% url 'home' %}"
+        class="block mt-4 text-yellow-800 font-bold text-xl mr-8"
+      >
         Home
       </a>
       <a href="" class="block mt-4 text-yellow-800 font-bold text-xl mr-8">
@@ -104,9 +107,25 @@
       </a>
     </div>
     <!-- Login -->
+    {% if request.user.is_authenticated %}
     <div>
       <a
         href=""
+        class="login-button mt-4 mr-8 px-4 py-2 bg-yellow-800 text-white rounded-lg"
+      >
+        Profile
+      </a>
+      <a
+        href="{% url 'logout' %}"
+        class="login-button mt-4 px-4 py-2 bg-yellow-800 text-white rounded-lg"
+      >
+        Logout
+      </a>
+    </div>
+    {% else %}
+    <div>
+      <a
+        href="{% url 'login' %}"
         class="login-button mt-4 mr-8 px-4 py-2 bg-yellow-800 text-white rounded-lg"
       >
         Login
@@ -118,5 +137,6 @@
         SignUp
       </a>
     </div>
+    {% endif %}
   </div>
 </nav>
