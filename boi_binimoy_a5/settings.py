@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'account',
+    'books',
+    'categories',
     'django_browser_reload'
 ]
 

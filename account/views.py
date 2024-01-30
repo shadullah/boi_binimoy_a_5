@@ -4,10 +4,7 @@ from django.views.generic import FormView
 from .forms import UserRegForm, UpdateUserForm
 from django.contrib.auth import login,logout
 from django.contrib.auth.views import LoginView
-from django.views import View
-from django.views.generic.edit import UpdateView
-from .models import UserAccount
-from .forms import UpdateUserForm
+from . import forms
 
 # Create your views here.
 class UserRegistration(FormView):
@@ -29,33 +26,43 @@ def user_logout(req):
     logout(req)
     return redirect('login')
 
-class UserProfileUpdateView(View):
-    # template_name = 'account/profile.html'
-    # model = UserAccount
-    # success_url = reverse_lazy('profile')
-    # form_class = UpdateUserForm
-    # pk_url_kwarg = 'id'
+# class UserProfileUpdateView(View):
+#     # template_name = 'account/profile.html'
+#     # model = UserAccount
+#     # success_url = reverse_lazy('profile')
+#     # form_class = UpdateUserForm
+#     # pk_url_kwarg = 'id'
     
-    # def get(self, request):
-    #     form = UpdateUserForm(instance=request.user)
-    #     return render(request, self.template_name, {'form':form})
+#     # def get(self, request):
+#     #     form = UpdateUserForm(instance=request.user)
+#     #     return render(request, self.template_name, {'form':form})
     
-    # def post(self, request):
-    #     form = UpdateUserForm(request.POST, instance=request.user)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('profile')
-    #     return render(request, self.template_name, {'form': form})
+#     # def post(self, request):
+#     #     form = UpdateUserForm(request.POST, instance=request.user)
+#     #     if form.is_valid():
+#     #         form.save()
+#     #         return redirect('profile')
+#     #     return render(request, self.template_name, {'form': form})
 
-    template_name = 'account/profile.html'
+#     template_name = 'account/profile.html'
 
-    def get(self, request):
-        form = UpdateUserForm(instance=request.user)
-        return render(request, self.template_name, {'form': form})
+#     def get(self, request):
+#         form = UpdateUserForm(instance=request.user)
+#         return render(request, self.template_name, {'form': form})
 
-    def post(self, request):
-        form = UpdateUserForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')  # Redirect to the user's profile page
-        return render(request, self.template_name, {'form': form})
+#     def post(self, request):
+#         form = UpdateUserForm(request.POST, instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('profile')  # Redirect to the user's profile page
+#         return render(request, self.template_name, {'form': form})
+
+def editProfile(req):
+    if req.method == 'POST':
+        edit_form = forms.UpdateUserForm(req.POST, instance=req.user)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect('profile')
+    else:
+        edit_form = forms.UserRegForm(instance=req.user)
+    return render(req, 'account/profile.html', {'form' : edit_form})

@@ -12,8 +12,8 @@ class UserRegForm(UserCreationForm):
     #         our_user.save()
     #     return our_user
         
-class UpdateUserForm(forms.ModelForm):
-    # password = None
+class UpdateUserForm(UserChangeForm):
+    password = None
     class Meta:
         model = User 
         fields = ['username', 'first_name', 'last_name', 'email']
