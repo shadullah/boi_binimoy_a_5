@@ -9,7 +9,7 @@ class Books(models.Model):
     price = models.IntegerField()
     image = models.ImageField(upload_to='books/static/img/', blank=True, null=True)
     category = models.ManyToManyField(Category)
-    
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
