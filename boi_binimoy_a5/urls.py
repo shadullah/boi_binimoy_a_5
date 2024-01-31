@@ -27,6 +27,7 @@ urlpatterns = [
     path('books/', include('books.urls')),
     # path('categories/', include('categories.urls')),
     path('<slug:category_slug>/', HomeView.as_view(), name='category_wise'),
+    path('transactions/', include('transactions.urls')),
 
     path("__reload__/", include("django_browser_reload.urls")),
 

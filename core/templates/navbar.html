@@ -110,7 +110,19 @@
     </div>
     <!-- Login -->
     {% if request.user.is_authenticated %}
-    <div>
+    <div class="flex justify-between items-center">
+      <a
+        href="{% url 'report' %}"
+        class="block mt-4 text-yellow-800 font-bold text-xl mr-8"
+      >
+        Transaction Report
+      </a>
+      <a
+        href="{% url 'deposite' %}"
+        class="block mt-4 text-yellow-800 font-bold text-xl mr-8"
+      >
+        Deposite
+      </a>
       <a
         href="{% url 'profile' %}"
         class="login-button mt-4 mr-8 px-4 py-2 bg-yellow-800 text-white rounded-lg"
