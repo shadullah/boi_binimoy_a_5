@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content %}
+
+<h1 class="text-4xl justify-center font-bold mt-10 flex items-center"><div class="w-1 h-6 mr-2 bg-blue-800"></div> Books</h1>
+
+<div class="grid grid-cols-4 gap-4 mx-24 my-12">
+  {% for book in books %}
+  <div class="mx-auto">
+    <div class="rounded-lg">
+      <div class="p-6 bg-gray-100 rounded-lg">
+        <img class="w-56 h-72 rounded-lg" src="{{ book.image.url }}" alt="#" />
+      </div>
+      <div class="px-6 mt-3">
+        <h5 class="text-xl font-bold">{{book.title | truncatechars:20 }}</h5>
+        <p class="italic">{{ book.author }}</p>
+      </div>
+      <div class="flex justify-between items-center py-3 px-6">
+        <p class="text-xl">${{ book.price }}</p>
+        <a href="{% url 'details' book.id %}">
+          <button class="bg-black text-white px-3 py-2 rounded-lg">
+            Details
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -19,3 +19,5 @@ class HomeView(TemplateView):
         context['category']=Category.objects.all()
         return context
     
+
+    

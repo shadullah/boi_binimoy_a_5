@@ -12,3 +12,7 @@ class DetailBook(DetailView):
     model = models.Books
     pk_url_kwarg = 'id'
     template_name = 'books.html'
+
+def booksAll(req):
+    data = Books.objects.all()
+    return render(req, 'booksAll.html', {'books': data})
