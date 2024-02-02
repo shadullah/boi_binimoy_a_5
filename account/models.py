@@ -8,3 +8,9 @@ class UserAccount(models.Model):
 
     def __str__(self):
         return str(self.account_no)
+    
+class profile(models.Model):
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+
+    def __str__(self):
+        return self.user

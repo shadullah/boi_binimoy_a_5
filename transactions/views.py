@@ -1,14 +1,19 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, ListView
 from .models import Transactions
 from django.contrib import messages
-from .forms import DepositeForm
+from .forms import DepositeForm, BuyForm
 from datetime import datetime
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
+from books.models import Books
+from account.models import UserAccount
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 class TransactionCreateMixin(LoginRequiredMixin, CreateView):
@@ -50,6 +55,39 @@ class depositeview(TransactionCreateMixin):
         )
         messages.success(self.request, f"{amount}$ was deposited to your account successfully!!")
         return super().form_valid(form)
+    
+# @login_required
+# class Buyview(TransactionCreateMixin):
+#     form_class = BuyForm
+    
+#     def get_initial(self):
+#         initial = {'transaction_type': 2}
+#         return initial
+    
+#     def form_valid(self, form):
+#         amount = form.cleaned_data.get('amount')
+#         account = self.request.user.account
+#         account.balance -= amount
+#         account.save(
+#             update_fields = ['balance']
+#         )
+#         messages.success(self.request, f"{amount}$ was cut off from your account")
+#         return super().form_valid(form)
+    
+
+# def buy(request, id):
+#     book = Books.objects.filter(id=id).first()
+#     user_account = get_object_or_404(UserAccount, user=request.user)
+#     user_tk = user_account.balance
+
+#     if user_tk >= book.price:
+#         user_tk -= book.price
+#         user_account.save(update_fields=["balance"])
+
+
+#     print(user_tk)
+#     return redirect('home')
+
     
 class TransactionReportView(LoginRequiredMixin, ListView):
     template_name = 'transactions/report.html'

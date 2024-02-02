@@ -31,3 +31,15 @@ class DepositeForm(TransactionForm):
                 f'you need at least {min_depo_amount} to deposite'
             )
         return amount
+    
+class BuyForm(TransactionForm):
+    def clean_amount(self):
+        account = self.account
+        balance = account.balance
+        amount = self.cleaned_data.get["amount"]
+        if balance < amount:
+            raise forms.ValidationError(
+                f'You do not have enough balance in your account. Your balance: {balance}'
+            )
+        return amount
+    

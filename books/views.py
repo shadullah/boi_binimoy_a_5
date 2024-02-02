@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 from .models import Books
 from . import models
 from django.views.generic import DetailView
@@ -16,3 +16,9 @@ class DetailBook(DetailView):
 def booksAll(req):
     data = Books.objects.all()
     return render(req, 'booksAll.html', {'books': data})
+
+def buyNow(req, book_id):
+    book = get_object_or_404(Books, pk=book_id)
+
+    print(book)
+    return redirect('home')
