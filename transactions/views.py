@@ -13,7 +13,8 @@ from django.contrib.auth.decorators import login_required
 from books.models import Books
 from account.models import UserAccount
 from django.shortcuts import get_object_or_404
-
+from django.core.mail import EmailMessage,EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 # Create your views here.
 class TransactionCreateMixin(LoginRequiredMixin, CreateView):
@@ -53,6 +54,15 @@ class depositeview(TransactionCreateMixin):
         account.save(
             update_fields = ['balance']
         )
+        mail_subject = "Deposite Message"
+        message = render_to_string('transactions/deposite_mail.html', {
+            'user': self.request.user,
+            'amount': amount,
+        })
+        to_email = self.request.user.email 
+        send_email = EmailMultiAlternatives(mail_subject, message, to=[to_email])
+        send_email.attach_alternative(message, "text/html")
+        send_email.send()
         messages.success(self.request, f"{amount}$ was deposited to your account successfully!!")
         return super().form_valid(form)
     
