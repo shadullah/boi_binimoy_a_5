@@ -56,17 +56,13 @@
     {% for item in borrow_books %}
     <tr class="bg-gray-100">
       <td class="py-2 px-4 border-b">{{ item.id }}</td>
-      <td class="py-2 px-4 border-b">
-        {{ item.user_acc.balance }} 
-      </td>
+      <td class="py-2 px-4 border-b">{{ item.user_acc.balance }}</td>
       <!-- <td class="py-2 px-4 border-b">
         {% for balan in item.balance_transaction %}
         {{balan.balance_after_transaction}}
         {% endfor %}
       </td> -->
-      <td class="py-2 px-4 border-b">
-        {{ item.borrow_date }} 
-      </td>
+      <td class="py-2 px-4 border-b">{{ item.borrow_date }}</td>
 
       <td class="py-2 px-4 border-b">{{item.book.title}}</td>
       <td class="py-2 px-4 border-b">{{item.book.price}}</td>
@@ -81,7 +77,9 @@
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          <a href="" class="text-white">review</a>
+          <a href="{% url 'details' item.book.id %}" class="text-white"
+            >review</a
+          >
         </button>
       </td>
     </tr>
@@ -90,7 +88,7 @@
   </tbody>
 </table>
 {% else %}
-<p>No cars borrowed Yet.</p>
+<p>No Books borrowed Yet.</p>
 {% endif %}
 
 <h1 class="text-3xl text-center font-bold mt-10">Edit Profile</h1>

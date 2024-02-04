@@ -32,16 +32,81 @@
       <p class="text-sm">{{books.description }}</p>
       <!-- truncatechars:200 -->
     </div>
-     <p class="flex items-center">
-      </p> 
-       <a href="{% url 'buy' books.id %}" class="px-3 py-2 bg-blue-600">BuyNow
-      </a> 
-    <!-- <form action="{% url 'report' %} method='post' ">
-      <div class="bg-blue-600 px-4 py-3 rounded-lg text-center">
-        <button class="text-white text-center font-bold" type="submit">Buy Now</button>
+
+    <a href="{% url 'buy' books.id %}" class="">
+      <div class="bg-yellow-800 px-10 py-3 rounded-lg text-white text-center">
+        Buy Now
       </div>
-    </form> -->
+    </a>
   </div>
 </div>
 
+<!-- comments here -->
+<h1 class="text-center my-6">Total comments: {{comments | length}}</h1>
+<div class="m-5">
+  {% for comment in comments %}
+  <p><b class="mr-3">{{comment.name}}</b><i>{{comment.created_on}}</i></p>
+  <p>{{comment.body}}</p>
+  <p>{{comment.rating}}</p>
+  {% endfor %}
+</div>
+
+<!-- comment form -->
+{% if request.user.is_authenticated %}
+{% if com_form %}
+
+<form
+  method="post"
+  class="w-1/3 mx-auto mt-5 mb-12 bg-gray-100 shadow-md rounded-lg px-4 pt-8 pb-8 mb-4"
+>
+  {% csrf_token %}
+  <div class="mx-auto text-center">
+    
+    <div class="flex justify-between mb-5">
+      <div class="mx-auto">
+        <label
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          for="{{ form.last_name.id_for_label }}"
+          >{{com_form.rating.label}}</label
+        >
+        {{com_form.rating}}
+      </div>
+      <div class="mx-auto">
+        <label
+          class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          for="{{ form.last_name.id_for_label }}"
+          >{{request.user}}</label
+        >
+        {{com_form.name}}
+      </div>
+    </div>
+    <label
+      class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+      for="{{ com_form.body.id_for_label }}"
+      >{{com_form.body.label}}</label
+    >
+    {{com_form.body}}
+    <div class="mt-5 text-center">
+      <a href="">
+        <button
+        class="bg-yellow-800 px-3 py-2 text-white rounded-lg"
+      >
+        Comment
+      </button>
+      </a>
+    </div>
+  </div>
+</form>
+
+
+<!-- <form class="m-5 p-12" method="post">
+  {% csrf_token %} 
+  
+  {{ com_form.as_p }}
+  <button class="bg-sky-600 px-3 py-2 text-black font-bold rounded-lg my-3">
+    Submit
+  </button>
+</form> -->
+{% endif %} 
+{% endif %}
 {% endblock %}
