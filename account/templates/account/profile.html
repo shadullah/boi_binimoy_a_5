@@ -1,53 +1,132 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <style>
   input[type="text"] {
-  padding: 10px;
-  /* border: 1px solid #ccc; */
-  border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
   input[type="email"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
   input[type="password"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
 </style>
+<h1 class="text-3xl text-center font-bold mt-10">Cart Item</h1>
+<!-- {% if borrow_books.errors %}
+{% for error in borrow_books.errors %}
+<p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+<p>VI</p>
+{% endfor %}
+{% endif %} -->
+
+{% if borrow_books %}
+
+<table class="min-w-full bg-white border border-gray-300">
+  <thead>
+    <tr>
+      <th class="py-2 px-4 border-b text-left bg-gray-200">ID</th>
+      <th class="py-2 px-4 border-b text-left bg-gray-200">BALANCE</th>
+      <!-- <th class="py-2 px-4 border-b text-left bg-gray-200">BALANCE After Transaction</th> -->
+      <th class="py-2 px-4 border-b text-left bg-gray-200">Date</th>
+      <th class="py-2 px-4 border-b text-left bg-gray-200">BOOK</th>
+      <th class="py-2 px-4 border-b text-left bg-gray-200">PRICE</th>
+      <th class="py-2 px-4 border-b text-left bg-gray-200">Return PAY</th>
+      <th class="py-2 px-4 border-b text-left bg-gray-200">REVIEW</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in borrow_books %}
+    <tr class="bg-gray-100">
+      <td class="py-2 px-4 border-b">{{ item.id }}</td>
+      <td class="py-2 px-4 border-b">
+        {{ item.user_acc.balance }} 
+      </td>
+      <!-- <td class="py-2 px-4 border-b">
+        {% for balan in item.balance_transaction %}
+        {{balan.balance_after_transaction}}
+        {% endfor %}
+      </td> -->
+      <td class="py-2 px-4 border-b">
+        {{ item.borrow_date }} 
+      </td>
+
+      <td class="py-2 px-4 border-b">{{item.book.title}}</td>
+      <td class="py-2 px-4 border-b">{{item.book.price}}</td>
+      <td class="py-2 px-4 border-b">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          <a href="" class="text-white">Pay</a>
+        </button>
+      </td>
+      <td class="py-2 px-4 border-b">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          <a href="" class="text-white">review</a>
+        </button>
+      </td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No cars borrowed Yet.</p>
+{% endif %}
+
 <h1 class="text-3xl text-center font-bold mt-10">Edit Profile</h1>
-<form method="post" class="w-1/2 mx-auto mt-5 mb-12 bg-gray-100 shadow-md rounded-lg px-8 pt-8 pb-8 mb-4">
+<form
+  method="post"
+  class="w-1/2 mx-auto mt-5 mb-12 bg-gray-100 shadow-md rounded-lg px-8 pt-8 pb-8 mb-4"
+>
   {% csrf_token %}
   <div class="flex justify-between mb-5">
     <div class="w-1/2 mr-2">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.first_name.id_for_label }}">{{form.first_name.label}}</label>
-  {{form.first_name}}
+      <label
+        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        for="{{ form.first_name.id_for_label }}"
+        >{{form.first_name.label}}</label
+      >
+      {{form.first_name}}
     </div>
-  <div class="w-1/2">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.last_name.id_for_label }}">{{form.last_name.label}}</label>
-  {{form.last_name}}
+    <div class="w-1/2">
+      <label
+        class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+        for="{{ form.last_name.id_for_label }}"
+        >{{form.last_name.label}}</label
+      >
+      {{form.last_name}}
+    </div>
   </div>
-  </div>
-  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.email.id_for_label }}">{{form.email.label}}</label>
+  <label
+    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+    for="{{ form.email.id_for_label }}"
+    >{{form.email.label}}</label
+  >
   {{form.email}}
   <div class="mt-5 text-center">
-    <button class="bg-yellow-800 px-3 py-2 text-white rounded-lg" type="submit">Update</button>
+    <button class="bg-yellow-800 px-3 py-2 text-white rounded-lg" type="submit">
+      Update
+    </button>
   </div>
 </form>
 {% endblock %}

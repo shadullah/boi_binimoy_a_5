@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from categories.models import Category
+from account.models import UserAccount
 
 # Create your models here.
 class Books(models.Model):

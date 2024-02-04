@@ -7,6 +7,8 @@ from django.contrib.auth.views import LoginView
 from . import forms
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from borrow_books.models import BorrowBook
+
 
 # Create your views here.
 class UserRegistration(FormView):
@@ -60,18 +62,25 @@ def user_logout(req):
 #         return render(request, self.template_name, {'form': form})
 
 def editProfile(req):
+    borrow_books = BorrowBook.objects.filter(user = req.user)
+    # for item in borrow_books:
+    #     print(item.balance_transaction.balance_after_transaction)
+    # for item in borrow_books:
+    #     balance_after_transaction = item.balance_transaction.balance_after_transaction
+    #     print(balance_after_transaction)
+    
+    # print(borrow_books.book.price)
     if req.method == 'POST':
         print(req)
         edit_form = forms.UserUpdateForm(req.POST, instance=req.user)
         if edit_form.is_valid():
-            print('hi aldfls')
             edit_form.save()
             return redirect('profile')
         else:
             print("invalid form")
     else:
         edit_form = forms.UserRegForm(instance=req.user)
-    return render(req, 'account/profile.html', {'form' : edit_form})
+    return render(req, 'account/profile.html', {'form' : edit_form, 'borrow_books': borrow_books})
 
 # class UserProfileUpdateView(LoginRequiredMixin,UpdateView):
 #     template_name = 'account/profile.html'

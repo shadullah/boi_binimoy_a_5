@@ -7,7 +7,7 @@ class Transactions(models.Model):
 
     amount = models.DecimalField(max_digits=15, decimal_places = 2)
     balance_after_transaction = models.DecimalField(max_digits=12, decimal_places = 2)
-    transaction_type = models.IntegerField(choices = ((1, 'Deposite'),(2, 'Buy'),), null=True)
+    transaction_type = models.IntegerField(choices = ((1, 'Deposite'),(2, 'borrow'),), null=True)
     timestamp = models.DateTimeField(auto_now_add = True)
 
     class Meta:
