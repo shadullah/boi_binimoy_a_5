@@ -29,7 +29,9 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = ['https://fokira-bank.onrender.com','https://*.127.0.0.1']
 
 
 # Application definition
@@ -94,15 +96,22 @@ WSGI_APPLICATION = 'boi_binimoy_a5.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'book_share',
+#        'USER': 'postgres',
+#        'PASSWORD': '123',
+#        'HOST': 'localhost',
+#        'PORT': '5432',
+#    }
+# }
+
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'book_share',
-       'USER': 'postgres',
-       'PASSWORD': '123',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   }
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgres://bookshare_user:DYcKPWsW3HmOaUZtnDAT4CPmINcayjh7@dpg-cmvnk56v3ddc73btmjb0-a.oregon-postgres.render.com/bookshare',
+    )
 }
 
 
