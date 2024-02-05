@@ -38,7 +38,8 @@ class DetailBook(DetailView):
         comments = book.comments.all()
         cmmnt_form = forms.CommentForm()
         # print(cmmnt_form)
-        borrow = BorrowBook.objects.filter(user=self.request.user, book=book).first()
+        if self.request.user:
+            borrow = BorrowBook.objects.filter(book=book).first()
 
         if borrow:
             cmmnt_form = forms.CommentForm()
@@ -48,25 +49,6 @@ class DetailBook(DetailView):
         context['comments'] = comments
         context['com_form']= cmmnt_form
         return context
-    
-# class PostView(View):
-#     template_name = 'comments.html'
-
-#     def get(self, request, *args, **kwargs):
-#         post = get_object_or_404(Books, pk=kwargs['pk'])
-#         # comments = post.comments.all()
-#         comment_form = forms.CommentForm()
-#         return render(request, self.template_name, {'comment_form': comment_form})
-
-#     def post(self, request, *args, **kwargs):
-#         post = get_object_or_404(books, pk=kwargs['pk'])
-#         comment_form = forms.CommentForm(request.POST)
-#         if comment_form.is_valid():
-#             new_comment = comment_form.save(commit=False)
-#             new_comment.post = post
-#             new_comment.save()
-            
-#         return self.get(request, *args, **kwargs)
     # model = models.Books
     # pk_url_kwarg = 'id'
     # template_name = 'books.html'
@@ -139,3 +121,20 @@ def buyNow(req, book_id):
     return redirect('profile')
 
 
+def pay(req, id):
+    user_acc = get_object_or_404(UserAccount, user=req.user)
+    print(user_acc.balance)
+    book = get_object_or_404(BorrowBook, id=id)
+
+    if book.returned:
+        messages.error(req, "You have already paid for this")
+        print("error")
+    else:
+        print("success")
+        book_price = book.book.price
+        user_acc.balance += book_price
+        user_acc.save(update_fields=["balance"])
+        book.returned = True
+        book.save(update_fields=["returned"])
+        messages.success(req, " payment successful")
+    return redirect('profile')

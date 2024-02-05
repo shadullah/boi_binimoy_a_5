@@ -37,6 +37,11 @@
 {% endfor %}
 {% endif %} -->
 
+<!-- {% for hidden_field in form.hidden_fields %} 
+    {{ hidden_field.errors }} 
+    {{ hidden_field }} 
+{% endfor %} -->
+
 {% if borrow_books %}
 
 <table class="min-w-full bg-white border border-gray-300">
@@ -67,20 +72,23 @@
       <td class="py-2 px-4 border-b">{{item.book.title}}</td>
       <td class="py-2 px-4 border-b">{{item.book.price}}</td>
       <td class="py-2 px-4 border-b">
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          <a href="" class="text-white">Pay</a>
-        </button>
+        
+          <a href="{% url 'pay' item.id %}" class="text-white">
+            <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Pay 
+            </button>
+          </a>
+        
       </td>
       <td class="py-2 px-4 border-b">
-        <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          <a href="{% url 'details' item.book.id %}" class="text-white"
-            >review</a
-          >
-        </button>
+        
+          <a href="{% url 'details' item.book.id %}" class="text-white">
+            <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+            review 
+          </button>
+          </a>
+        
       </td>
     </tr>
 
