@@ -62,7 +62,7 @@ class depositeview(TransactionCreateMixin):
         to_email = self.request.user.email 
         send_email = EmailMultiAlternatives(mail_subject, message, to=[to_email])
         send_email.attach_alternative(message, "text/html")
-        send_email.send()
+        # send_email.send()
         messages.success(self.request, f"{amount}$ was deposited to your account successfully!!")
         return super().form_valid(form)
     
