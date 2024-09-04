@@ -18,6 +18,3 @@ class HomeView(TemplateView):
             context['books'] = Books.objects.filter(category=category)
         context['category']=Category.objects.all()
         return context
-    
-
-    
